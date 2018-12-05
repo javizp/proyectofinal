@@ -1,0 +1,27 @@
+{
+  "name": "MuseoBilletesMonedas",
+  "version": "1.0.0",
+  "description": "Proyecto Final de Billetes y Monedas",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "empaqueta": "electron-packager . Marvel --overwrite --asar"
+  },
+  "keywords": [
+    "billetes",
+    "electron",
+    "javascript",
+    "html",
+    "css",
+    "rc"
+  ],
+  "author": "Lic. Javier Zamora",
+  "license": "MIT",
+  "devDependencies": {
+    "asar": "^0.14.5",
+    "electron": "^3.0.10",
+    "electron-packager": "^12.2.0",
+    "electron-require": "^0.3.0"
+  }
+}
