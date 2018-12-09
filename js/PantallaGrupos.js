@@ -27,6 +27,26 @@ var buscaPiezas = function(){
 	PantallaPiezas.show();
 }
 
+var agregarFavorito = function(){
+	const data = new FormData();
+	data.append('titulo',titulo);
+	data.append('descripcion', descripcion);
+	data.append('detalle', detalle);
+	data.append('imagen', imagen);
+	fetch('http://localhost/proyectofinal/model/agregarFavoritos.php',{
+		method: 'post',
+		body: data
+	})
+	.then(datos=>datos.json())
+	.then(datos=>{
+		if(datos.respuesta == true){
+			alert('Favorito agregado')
+		}else{
+			alert('No se pudo agregar a tu lista de favoritos')
+		}
+	})
+}
+
 var buscaGrupos = function(){
 	var url='http://museobillete.azurewebsites.net/api/Expo/'
 	fetch(url+vitrina)
@@ -46,7 +66,7 @@ var buscaGrupos = function(){
 				</article>
 				<article class="abajoDerecha">
 					<div class="txtTitulo">${datosGrupos[i].piezas[0].titulo}</div>
-					<div class="txtTitulo">${datosGrupos[i].piezas[0].descripcion}</div>
+					<div class="txtDescripcion">${datosGrupos[i].piezas[0].descripcion}</div>
 					<button class="btnDetallePieza" value="${datosGrupos[i].piezas[0].detallesUrl}">Detalle Pieza</button>
 					<button class="btnFavorito" value="${datosGrupos[i].piezas[0].id}">Favorito</button>
 				</article>
@@ -75,6 +95,9 @@ var buscaGrupos = function(){
 		}
 		for(let i=0;i<btnAbrirGrupo.length;i++){
 			btnAbrirGrupo[i].addEventListener('click', buscaPiezas);
+		}
+		for (let i = 0; i < btnFavorito.length; i++) {
+			btnFavorito[i].addEventListener('click', agregarFavorito);
 		}
 	})
 }

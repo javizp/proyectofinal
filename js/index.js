@@ -6,10 +6,10 @@ const url=require('url')
 
 let PantallaMostradores;
 
-var btnMostradores=document.getElementsByClassName('btnMostradores')
-var btnFavoritos=document.getElementsByClassName('btnFavoritos')
+var btnMostradores=document.getElementsByClassName('btnMostradores');
+var btnFavoritos=document.getElementById('btnFavoritos');
 
-btnFavoritos.addEventListener('click',buscaFavoritos)
+btnFavoritos.addEventListener('click',buscaFavoritos);
 
 var buscaMostradores = function(){
 	localStorage.setItem("vitrina", this.value);	
