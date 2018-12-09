@@ -27,7 +27,7 @@ var buscaPiezas = function(){
 	PantallaPiezas.show();
 }
 
-var agregarFavorito = function(){
+var agregarFavorito = function(titulo,descripcion,detalle,imagen){
 	const data = new FormData();
 	data.append('titulo',titulo);
 	data.append('descripcion', descripcion);
@@ -97,7 +97,7 @@ var buscaGrupos = function(){
 			btnAbrirGrupo[i].addEventListener('click', buscaPiezas);
 		}
 		for (let i = 0; i < btnFavorito.length; i++) {
-			btnFavorito[i].addEventListener('click', agregarFavorito);
+			btnFavorito[i].addEventListener('click', function () { agregarFavorito(datosGrupos[i].piezas[0].titulo, datosGrupos[i].piezas[0].descripcion, datosGrupos[i].piezas[0].detallesUrl, datosGrupos[i].piezas[0].id); }, false);
 		}
 	})
 }
