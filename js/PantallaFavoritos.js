@@ -1,26 +1,57 @@
+
+var btnFavorito = document.getElementsByClassName('btnFavorito');
+var btnDetallePieza = document.getElementsByClassName('btnDetallePieza');
+
+var detallePieza = function () {
+	window.open(this.value, "_self")
+}
+
+var quitarFavorito = function (id) {
+	const data = new FormData();
+	data.append('id', id);
+	fetch('http://localhost/proyectofinal/model/quitarFavoritos.php', {
+		method: 'post',
+		body: data
+	})
+		.then(datos => datos.json())
+		.then(datos => {
+			if (datos.respuesta == true) {
+				alert('Favorito eliminado')
+				location.reload();
+			} else {
+				alert('No se pudo retirar de tu lista de favoritos')
+			}
+		})
+}
+
 var buscaFavoritos = function(){
-	var url='http://museobillete.azurewebsites.net/api/Expo/'
+	var url ='http://localhost/proyectofinal/model/showFavoritos.php'
 	fetch(url)
 	.then(datos=>datos.json())
 	.then(datos=>{
 		var foto = ''
-		var datosMostradores = datos.mostradores
-		for(let i=0; i<datosMostradores.length; i++){
-			foto=datosMostradores[i].imagenFondoUrl
+		for(let i=0; i<datos.length; i++){
+			foto=datos[i].imagen
 			document.getElementById('favoritos').innerHTML += `
 			<article class="abajoIzquierda">
-					<img src="${foto}" class="imgFoto">
+				Pieza Unica
+				<img src="${foto}" class="imgFoto">
 			</article>
 			<article class="abajoDerecha">
-				<div class="txtTitulo">${datosMostradores[i].titulo}</div>
-				<button class="btnGrupos" value="${i}">Grupos</button> 
+				<div class="txtTitulo">${datos[i].titulo}</div>
+				<div class="txtDescripcion">${datos[i].descripcion}</div>
+				<button class="btnDetallePieza" value="${datos[i].detalle}">Detalle Pieza</button>
+				<button class="btnFavorito" value="${datos[i].id}">Quitar favorito</button>
 			</article>
 			<hr>
 			<br>
 		`
 		} //Termina For
-		for(let i=0;i<btnGrupos.length;i++){
-			btnGrupos[i].addEventListener('click', buscaGrupos);
+		for (let i = 0; i < btnDetallePieza.length; i++) {
+			btnDetallePieza[i].addEventListener('click', detallePieza);
+		}
+		for(let i=0;i<btnFavorito.length;i++){
+			btnFavorito[i].addEventListener('click', function () { quitarFavorito(datos[i].id); }, false);
 		}
 	})
 }

@@ -7,9 +7,6 @@ const url=require('url')
 let PantallaMostradores;
 
 var btnMostradores=document.getElementsByClassName('btnMostradores');
-var btnFavoritos=document.getElementById('btnFavoritos');
-
-btnFavoritos.addEventListener('click',buscaFavoritos);
 
 var buscaMostradores = function(){
 	localStorage.setItem("vitrina", this.value);	
@@ -23,7 +20,7 @@ var buscaMostradores = function(){
 }
 
 var buscaFavoritos = function(){
-	localStorage.setItem("vitrina", this.value);	
+	console.log("click")	
 	PantallaFavoritos= new BrowserWindow({width:800,height:825});
 	PantallaFavoritos.loadURL(url.format({
 		pathname: path.join(__dirname,'../PantallaFavoritos.html'),
@@ -58,6 +55,9 @@ var buscaVitrinas = function(){
 			btnMostradores[i].addEventListener('click', buscaMostradores);
 		}	
 	})
-}	
-buscaVitrinas();
+}
+buscaVitrinas();	
 
+var btnFavoritos = document.getElementById("btnFavoritos");
+
+btnFavoritos.addEventListener("click", buscaFavoritos, false); 

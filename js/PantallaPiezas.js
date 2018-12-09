@@ -41,7 +41,7 @@ var buscaPiezas = function(){
 				<div class="txtTitulo">${datosPiezas[i].titulo}</div>
 				<div class="txtTitulo">${datosPiezas[i].descripcion}</div>
 				<button class="btnDetallePieza" value="${datosPiezas[i].detallesUrl}">Detalle Pieza</button>
-				<button class="btnFavorito" value="${datosPiezas[i].id}">Favorito</button>
+				<button class="btnFavorito" value="${datosPiezas[i].id}">Agregar favorito</button>
 			</article>
 			<hr>
 			<br>

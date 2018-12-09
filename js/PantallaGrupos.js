@@ -68,7 +68,7 @@ var buscaGrupos = function(){
 					<div class="txtTitulo">${datosGrupos[i].piezas[0].titulo}</div>
 					<div class="txtDescripcion">${datosGrupos[i].piezas[0].descripcion}</div>
 					<button class="btnDetallePieza" value="${datosGrupos[i].piezas[0].detallesUrl}">Detalle Pieza</button>
-					<button class="btnFavorito" value="${datosGrupos[i].piezas[0].id}">Favorito</button>
+					<button class="btnFavorito" value="${datosGrupos[i].piezas[0].id}">Agregar a favoritos</button>
 				</article>
 				<hr>
 				<br>
@@ -97,7 +97,7 @@ var buscaGrupos = function(){
 			btnAbrirGrupo[i].addEventListener('click', buscaPiezas);
 		}
 		for (let i = 0; i < btnFavorito.length; i++) {
-			btnFavorito[i].addEventListener('click', function () { agregarFavorito(datosGrupos[i].piezas[0].titulo, datosGrupos[i].piezas[0].descripcion, datosGrupos[i].piezas[0].detallesUrl, datosGrupos[i].piezas[0].id); }, false);
+			btnFavorito[i].addEventListener('click', function () { agregarFavorito(datosGrupos[i].piezas[0].titulo, datosGrupos[i].piezas[0].descripcion, datosGrupos[i].piezas[0].detallesUrl, foto); }, false);
 		}
 	})
 }
