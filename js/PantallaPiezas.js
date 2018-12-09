@@ -11,9 +11,16 @@ var btnDetallePieza=document.getElementsByClassName('btnDetallePieza')
 var vitrina=localStorage.getItem('vitrina')
 var mostrador=localStorage.getItem('mostrador')
 var grupo=localStorage.getItem('grupo')
+var btnFavoritos=document.getElementsByClassName('btnFavoritos')
+
+btnFavorito.addEventListener('click',agregarFavorito)
 
 var detallePieza = function(){
 	window.open(this.value, "_self")
+}
+
+var agregarFavorito = function(){
+	
 }
 
 var buscaPiezas = function(){

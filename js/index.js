@@ -7,6 +7,9 @@ const url=require('url')
 let PantallaMostradores;
 
 var btnMostradores=document.getElementsByClassName('btnMostradores')
+var btnFavoritos=document.getElementsByClassName('btnFavoritos')
+
+btnFavoritos.addEventListener('click',buscaFavoritos)
 
 var buscaMostradores = function(){
 	localStorage.setItem("vitrina", this.value);	
@@ -17,6 +20,17 @@ var buscaMostradores = function(){
 		slashes: true
 	}))
 	PantallaMostradores.show();
+}
+
+var buscaFavoritos = function(){
+	localStorage.setItem("vitrina", this.value);	
+	PantallaFavoritos= new BrowserWindow({width:800,height:825});
+	PantallaFavoritos.loadURL(url.format({
+		pathname: path.join(__dirname,'../PantallaFavoritos.html'),
+		procol: 'file',
+		slashes: true
+	}))
+	PantallaFavoritos.show();
 }
 
 var buscaVitrinas = function(){
