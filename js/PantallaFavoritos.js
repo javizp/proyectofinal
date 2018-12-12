@@ -21,7 +21,7 @@ var quitarFavorito = function (id) {
 			} else {
 				alert('No se pudo retirar de tu lista de favoritos')
 			}
-		})
+	})
 }
 
 var buscaFavoritos = function(){
@@ -41,7 +41,7 @@ var buscaFavoritos = function(){
 				<div class="txtTitulo">${datos[i].titulo}</div>
 				<div class="txtDescripcion">${datos[i].descripcion}</div>
 				<button class="btnDetallePieza" value="${datos[i].detalle}">Detalle Pieza</button>
-				<button class="btnFavorito" value="${datos[i].id}">Quitar favorito</button>
+				<button class="btnFavorito"><img src="img/corazon_rojo.png"/></button>
 			</article>
 			<hr>
 			<br>

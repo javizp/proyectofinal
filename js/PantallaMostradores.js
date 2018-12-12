@@ -36,7 +36,7 @@ var buscaMostradores = function(){
 			</article>
 			<article class="abajoDerecha">
 				<div class="txtTitulo">${datosMostradores[i].titulo}</div>
-				<button class="btnGrupos" value="${i}">Grupos</button> 
+				<button class="btnGrupos" value="${i}">Abrir Mostrador</button> 
 			</article>
 			<hr>
 			<br>

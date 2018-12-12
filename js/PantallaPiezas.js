@@ -11,16 +11,62 @@ var btnDetallePieza=document.getElementsByClassName('btnDetallePieza')
 var vitrina=localStorage.getItem('vitrina')
 var mostrador=localStorage.getItem('mostrador')
 var grupo=localStorage.getItem('grupo')
-var btnFavoritos=document.getElementsByClassName('btnFavoritos')
 
-btnFavorito.addEventListener('click',agregarFavorito)
 
 var detallePieza = function(){
 	window.open(this.value, "_self")
 }
 
-var agregarFavorito = function(){
-	
+var agregarFavorito = function(id,titulo,descripcion,detalle,imagen){
+	//Buscamos si ya existe en la tabla favoritos
+	const formId = new FormData();
+	formId.append('id', id);
+	fetch('http://localhost/proyectofinal/model/encuentraUnFavorito.php', {
+		method: 'post',
+		body: formId
+	})			
+		.then(existeEnFavoritos => existeEnFavoritos.json())
+		.then(existeEnFavoritos => {			
+				if (existeEnFavoritos.respuesta == true) {
+					//Al entrar aqui estamos eliminadolo de la tabla de favoritos
+					const data = new FormData();
+					data.append('id', id);
+					fetch('http://localhost/proyectofinal/model/quitarFavoritos.php', {
+						method: 'post',
+						body: data
+					})
+						.then(datos => datos.json())
+						.then(datos => {
+							if (datos.respuesta == true) {
+								alert('Favorito eliminado')
+								location.reload();
+							} else {
+								alert('No se pudo retirar de tu lista de favoritos')
+							}
+					})
+				} else {
+					//Al entrar aqui estamos gruandolo en la tabla de favoritos
+					const data = new FormData();
+					data.append('id',id);
+					data.append('titulo',titulo);
+					data.append('descripcion', descripcion);
+					data.append('detalle', detalle);
+					data.append('imagen', imagen);
+					fetch('http://localhost/proyectofinal/model/agregarFavoritos.php',{
+						method: 'post',
+						body: data
+					})
+					.then(datos=>datos.json())
+					.then(datos=>{
+						if(datos.respuesta == true){
+							alert('Favorito agregado')
+							location.reload();
+						}else{
+							alert('No se pudo agregar a tu lista de favoritos')
+						}
+					})					
+				}													
+		})
 }
 
 var buscaPiezas = function(){
@@ -41,7 +87,7 @@ var buscaPiezas = function(){
 				<div class="txtTitulo">${datosPiezas[i].titulo}</div>
 				<div class="txtTitulo">${datosPiezas[i].descripcion}</div>
 				<button class="btnDetallePieza" value="${datosPiezas[i].detallesUrl}">Detalle Pieza</button>
-				<button class="btnFavorito" value="${datosPiezas[i].id}">Agregar favorito</button>
+				<button class="btnFavorito"></button>
 			</article>
 			<hr>
 			<br>
@@ -49,6 +95,23 @@ var buscaPiezas = function(){
 		} //Termina For
 		for(let i=0;i<btnDetallePieza.length;i++){
 			btnDetallePieza[i].addEventListener('click', detallePieza);
+		}
+		for (let i = 0; i < btnFavorito.length; i++) {
+			btnFavorito[i].addEventListener('click', function () { agregarFavorito(datosPiezas[i].id, datosPiezas[i].titulo, datosPiezas[i].descripcion, datosPiezas[i].detallesUrl, datosPiezas[i].imagenFondoUrl); }, false);
+			const formId = new FormData();
+			formId.append('id', datosPiezas[i].id);
+			fetch('http://localhost/proyectofinal/model/encuentraUnFavorito.php', {
+				method: 'post',
+				body: formId
+			})			
+				.then(existeEnFavoritos => existeEnFavoritos.json())
+				.then(existeEnFavoritos => {			
+						if (existeEnFavoritos.respuesta == true) {
+							btnFavorito[i].innerHTML += `<img src='img/corazon_rojo.png'> `
+						} else {
+							btnFavorito[i].innerHTML += `<img src='img/corazon_blanco.png'>` 					
+						}													
+				})	
 		}
 	})
 }

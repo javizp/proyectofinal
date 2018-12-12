@@ -27,24 +27,56 @@ var buscaPiezas = function(){
 	PantallaPiezas.show();
 }
 
-var agregarFavorito = function(titulo,descripcion,detalle,imagen){
-	const data = new FormData();
-	data.append('titulo',titulo);
-	data.append('descripcion', descripcion);
-	data.append('detalle', detalle);
-	data.append('imagen', imagen);
-	fetch('http://localhost/proyectofinal/model/agregarFavoritos.php',{
+var agregarFavorito = function(id,titulo,descripcion,detalle,imagen){
+	//Buscamos si ya existe en la tabla favoritos
+	const formId = new FormData();
+	formId.append('id', id);
+	fetch('http://localhost/proyectofinal/model/encuentraUnFavorito.php', {
 		method: 'post',
-		body: data
-	})
-	.then(datos=>datos.json())
-	.then(datos=>{
-		if(datos.respuesta == true){
-			alert('Favorito agregado')
-		}else{
-			alert('No se pudo agregar a tu lista de favoritos')
-		}
-	})
+		body: formId
+	})			
+		.then(existeEnFavoritos => existeEnFavoritos.json())
+		.then(existeEnFavoritos => {			
+				if (existeEnFavoritos.respuesta == true) {
+					//Al entrar aqui estamos eliminadolo de la tabla de favoritos
+					const data = new FormData();
+					data.append('id', id);
+					fetch('http://localhost/proyectofinal/model/quitarFavoritos.php', {
+						method: 'post',
+						body: data
+					})
+						.then(datos => datos.json())
+						.then(datos => {
+							if (datos.respuesta == true) {
+								alert('Favorito eliminado')
+								location.reload();
+							} else {
+								alert('No se pudo retirar de tu lista de favoritos')
+							}
+					})
+				} else {
+					//Al entrar aqui estamos gruandolo en la tabla de favoritos
+					const data = new FormData();
+					data.append('id',id);
+					data.append('titulo',titulo);
+					data.append('descripcion', descripcion);
+					data.append('detalle', detalle);
+					data.append('imagen', imagen);
+					fetch('http://localhost/proyectofinal/model/agregarFavoritos.php',{
+						method: 'post',
+						body: data
+					})
+					.then(datos=>datos.json())
+					.then(datos=>{
+						if(datos.respuesta == true){
+							alert('Favorito agregado')
+							location.reload();
+						}else{
+							alert('No se pudo agregar a tu lista de favoritos')
+						}
+					})					
+				}													
+		})
 }
 
 var buscaGrupos = function(){
@@ -57,8 +89,9 @@ var buscaGrupos = function(){
 		var datosGrupos = datos.mostradores[mostrador].grupos
 		for(let i=0; i<datosGrupos.length; i++){
 			unico = datosGrupos[i].unico
-			if (unico == true) {
-				foto=datosGrupos[i].piezas[0]. imagenFondoUrl
+			var imgBotonFavorito = ''
+			if (unico == true) {											
+				foto=datosGrupos[i].piezas[0].imagenFondoUrl
 				document.getElementById('grupos').innerHTML += `
 				<article class="abajoIzquierda">
 					Pieza Unica
@@ -68,11 +101,11 @@ var buscaGrupos = function(){
 					<div class="txtTitulo">${datosGrupos[i].piezas[0].titulo}</div>
 					<div class="txtDescripcion">${datosGrupos[i].piezas[0].descripcion}</div>
 					<button class="btnDetallePieza" value="${datosGrupos[i].piezas[0].detallesUrl}">Detalle Pieza</button>
-					<button class="btnFavorito" value="${datosGrupos[i].piezas[0].id}">Agregar a favoritos</button>
+					<button class="btnFavorito"></button>
 				</article>
 				<hr>
 				<br>
-				`
+				`				
 			} else {
 				foto=datosGrupos[i]. imagenFondoUrl
 				document.getElementById('grupos').innerHTML += `
@@ -81,8 +114,7 @@ var buscaGrupos = function(){
 					<img src="${foto}" class="imgFoto">
 				</article>
 				<article class="abajoDerecha">
-					<div class="txtTitulo">${datosGrupos[i].titulo}</div>
-					<div class="txtTitulo">${datosGrupos[i].descripcion}</div>
+					<div class="txtTitulo">${datosGrupos[i].titulo}</div>					
 					<button class="btnAbrirGrupo" value="${i}">Abrir Grupo</button>
 				</article>
 				<hr>
@@ -91,15 +123,28 @@ var buscaGrupos = function(){
 			}
 		} //Termina For
 		for(let i=0;i<btnDetallePieza.length;i++){
-			btnDetallePieza[i].addEventListener('click', detallePieza);
+			btnDetallePieza[i].addEventListener('click', detallePieza);	
 		}
 		for(let i=0;i<btnAbrirGrupo.length;i++){
 			btnAbrirGrupo[i].addEventListener('click', buscaPiezas);
 		}
 		for (let i = 0; i < btnFavorito.length; i++) {
-			btnFavorito[i].addEventListener('click', function () { agregarFavorito(datosGrupos[i].piezas[0].titulo, datosGrupos[i].piezas[0].descripcion, datosGrupos[i].piezas[0].detallesUrl, foto); }, false);
+			btnFavorito[i].addEventListener('click', function () { agregarFavorito(datosGrupos[i].piezas[0].id, datosGrupos[i].piezas[0].titulo, datosGrupos[i].piezas[0].descripcion, datosGrupos[i].piezas[0].detallesUrl, datosGrupos[i].piezas[0]. imagenFondoUrl); }, false);
+			const formId = new FormData();
+			formId.append('id', datosGrupos[i].piezas[0].id);
+			fetch('http://localhost/proyectofinal/model/encuentraUnFavorito.php', {
+				method: 'post',
+				body: formId
+			})			
+				.then(existeEnFavoritos => existeEnFavoritos.json())
+				.then(existeEnFavoritos => {			
+						if (existeEnFavoritos.respuesta == true) {
+							btnFavorito[i].innerHTML += `<img src='img/corazon_rojo.png'> `
+						} else {
+							btnFavorito[i].innerHTML += `<img src='img/corazon_blanco.png'>` 					
+						}													
+				})				
 		}
 	})
 }
-
 buscaGrupos();

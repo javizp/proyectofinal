@@ -25,7 +25,7 @@ let PantallaPrincipal;
 
 function muestraPantallaPrincipal(){
 	//Creamos una pantalla vacia
-	PantallaPrincipal=new BrowserWindow({alwaysOnTop:false, width:1024, heigth:450});
+	PantallaPrincipal=new BrowserWindow({alwaysOnTop:false, width:800, heigth:450});
 	//Cargamos en la pantalla el contenido de nuestra página
 	PantallaPrincipal.loadURL(url.format({
 		pathname: path.join(__dirname, 'index.html'),

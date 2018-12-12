@@ -10,7 +10,7 @@ var btnMostradores=document.getElementsByClassName('btnMostradores');
 
 var buscaMostradores = function(){
 	localStorage.setItem("vitrina", this.value);	
-	PantallaMostradores= new BrowserWindow({width:800,height:825});
+	PantallaMostradores= new BrowserWindow({width:800,height:600});
 	PantallaMostradores.loadURL(url.format({
 		pathname: path.join(__dirname,'../PantallaMostradores.html'),
 		procol: 'file',
@@ -21,7 +21,7 @@ var buscaMostradores = function(){
 
 var buscaFavoritos = function(){
 	console.log("click")	
-	PantallaFavoritos= new BrowserWindow({width:800,height:825});
+	PantallaFavoritos= new BrowserWindow({width:800,height:450});
 	PantallaFavoritos.loadURL(url.format({
 		pathname: path.join(__dirname,'../PantallaFavoritos.html'),
 		procol: 'file',
@@ -45,7 +45,7 @@ var buscaVitrinas = function(){
 			</article>
 			<article class="abajoDerecha">
 				<div class="txtTitulo">${datos[i].titulo}</div>
-				<button class="btnMostradores" value="${datos[i].id}">Mostradores</button> 
+				<button class="btnMostradores" value="${datos[i].id}">Abrir Vitrina</button> 
 			</article>
 			<hr>
 			<br>
