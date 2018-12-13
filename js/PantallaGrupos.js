@@ -92,32 +92,34 @@ var buscaGrupos = function(){
 			var imgBotonFavorito = ''
 			if (unico == true) {											
 				foto=datosGrupos[i].piezas[0].imagenFondoUrl
-				document.getElementById('grupos').innerHTML += `
-				<article class="abajoIzquierda">
-					Pieza Unica
-					<img src="${foto}" class="imgFoto">
+				document.getElementById('abajo').innerHTML += `
+				<article class="contenedor">
+					<article class="abajoIzquierda">
+						<img src="${foto}" class="imgFoto">
+					</article>
+					<article class="abajoDerecha">
+						Pieza Unica
+						<div class="txtTitulo">${datosGrupos[i].piezas[0].titulo}</div>
+						<div class="txtDescripcion">${datosGrupos[i].piezas[0].descripcion}</div>
+						<button class="btnDetallePieza pure-button" value="${datosGrupos[i].piezas[0].detallesUrl}">Detalle Pieza</button>
+						<button class="btnFavorito"></button>
+					</article>
 				</article>
-				<article class="abajoDerecha">
-					<div class="txtTitulo">${datosGrupos[i].piezas[0].titulo}</div>
-					<div class="txtDescripcion">${datosGrupos[i].piezas[0].descripcion}</div>
-					<button class="btnDetallePieza" value="${datosGrupos[i].piezas[0].detallesUrl}">Detalle Pieza</button>
-					<button class="btnFavorito"></button>
-				</article>
-				<hr>
 				<br>
 				`				
 			} else {
 				foto=datosGrupos[i]. imagenFondoUrl
-				document.getElementById('grupos').innerHTML += `
-				<article class="abajoIzquierda">
-					Grupo
-					<img src="${foto}" class="imgFoto">
-				</article>
-				<article class="abajoDerecha">
-					<div class="txtTitulo">${datosGrupos[i].titulo}</div>					
-					<button class="btnAbrirGrupo" value="${i}">Abrir Grupo</button>
-				</article>
-				<hr>
+				document.getElementById('abajo').innerHTML += `
+				<article class="contenedor">
+					<article class="abajoIzquierda">
+						Grupo
+						<img src="${foto}" class="imgFoto">
+					</article>
+					<article class="abajoDerecha">
+						<div class="txtTitulo">${datosGrupos[i].titulo}</div>					
+						<button class="btnAbrirGrupo pure-button" value="${i}">Abrir Grupo</button>
+					</article>
+				</article>							
 				<br>
 				`
 			}

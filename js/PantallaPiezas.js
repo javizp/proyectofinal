@@ -79,17 +79,18 @@ var buscaPiezas = function(){
 		for(let i=0; i<datosPiezas.length; i++){			
 			
 			foto=datosPiezas[i].imagenFondoUrl
-			document.getElementById('piezas').innerHTML += `
-			<article class="abajoIzquierda">			
-				<img src="${foto}" class="imgFoto">
+			document.getElementById('abajo').innerHTML += `
+			<article class="contenedor">
+				<article class="abajoIzquierda">			
+					<img src="${foto}" class="imgFoto">
+				</article>
+				<article class="abajoDerecha">
+					<div class="txtTitulo">${datosPiezas[i].titulo}</div>
+					<div class="txtTitulo">${datosPiezas[i].descripcion}</div>
+					<button class="btnDetallePieza pure-button" value="${datosPiezas[i].detallesUrl}">Detalle Pieza</button>
+					<button class="btnFavorito"></button>
+				</article>
 			</article>
-			<article class="abajoDerecha">
-				<div class="txtTitulo">${datosPiezas[i].titulo}</div>
-				<div class="txtTitulo">${datosPiezas[i].descripcion}</div>
-				<button class="btnDetallePieza" value="${datosPiezas[i].detallesUrl}">Detalle Pieza</button>
-				<button class="btnFavorito"></button>
-			</article>
-			<hr>
 			<br>
 			`		
 		} //Termina For

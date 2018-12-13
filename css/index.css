@@ -1,69 +1,152 @@
-body{
-	background: gray;
+body{  
+    background-image: url("../img/museo1.png");  
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 	font-size: 16px;
 	max-width: 800px;
 	min-width: 800px;
-	height: 700px;
+    font-family: 'Open Sans', sans-serif;
+}
 
-}
-.arriba{
-	background: blue;
-	color:white;
-	height: 50px;
-	padding-top: 20px;	
-	text-align: center;
-	width: 800px;
-}
 #museo{
 	font-style: bold;
-	font-size: 25px;
+	font-size: 30px;
 	margin-left: 100px;
 }
 #abajo{
-	color: black;
-	height: 718px;
-	padding-left: 15px;
-	padding-top: 15px;
-	width: 98.5%;
+	width: 800px;
 }
 #abajo article{
 	display: inline-block;
 	vertical-align: top;
 }
-.abajoIzquierda{
-	width: 400px;
-}
-.abajoDerecha{
-	width: 300px;
+.arriba{
+    border: 2px solid black;
+    border-radius: 5px; 
+    color: white;
+    height: 50px;
+    margin-bottom: 5px; 
+    text-align: center;
+    width: 800px;  
 }
 .arriba button{
-	background: green;
-	border: none;
-	border-radius: 5px;
-	color: white;
-	font-size: 1em;
+    background: green;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    position: relative;
+    left: 50px;
+    bottom: 3px;
+}
+
+.contenedor {
+    background: #ced3db;
+    border: 2px solid black;
+    border-radius: 5px;     
+    height: 100px;    
+    margin-left: 100px;
+    margin-bottom: 10px;
+    opacity: .9;
+    width: 600px;
+}
+.abajoIzquierda{
 	margin-left: 100px;
+    width: 100px;
+}
+
+.abajoDerecha{
+    text-align: center;
+	width: 300px;
 }
 
 .imgFoto{
-	padding-left: 100px;
-	width: 150px;
+    padding-top: 5px;
+    height: 80px;
+	width: 130px;
 }
 .txtTitulo{
+    font-size: 1.5em;
+    font-weight: bold;
 	text-align: center;
-	font-size: 1.5em;
-	font-family: "arial";
-	font-weight: bold;
 }
 
+.btnFavorito {
+    background: transparent;
+    border: none !important;
+}
+.btnFavorito img {
+    height: 40px;
+    width: 40px;
+}
 
+.btnAbrir{
+    
+}
+.pure-button {
+    display: inline-block;
+    zoom: 1;
+    line-height: normal;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    box-sizing: border-box;
+}
 
+.pure-button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
 
+.pure-button-group {
+    letter-spacing: -0.31em; 
+    *letter-spacing: normal; 
+    *word-spacing: -0.43em; 
+    text-rendering: optimizespeed;
+}
 
+.opera-only :-o-prefocus,
+.pure-button-group {
+    word-spacing: -0.43em;
+}
 
+.pure-button-group .pure-button {
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto;
+}
 
+.pure-button {
+    padding: 0.5em 1em;
+    color: #444; 
+    color: rgba(0, 0, 0, 0.80); 
+    border: 1px solid #999;  
+    border: none rgba(0, 0, 0, 0);  
+    background-color: #E6E6E6;
+    text-decoration: none;
+    border-radius: 2px;
+}
 
-
-
-
+.pure-button-hover,
+.pure-button:hover,
+.pure-button:focus {
+    filter: alpha(opacity=90);
+    background-image: -webkit-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+    background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+}
+.pure-button:focus {
+    outline: 0;
+}
+.pure-button-active,
+.pure-button:active {
+    box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
+    border-color: #000\9;
+}
 

@@ -30,16 +30,17 @@ var buscaMostradores = function(){
 		var datosMostradores = datos.mostradores
 		for(let i=0; i<datosMostradores.length; i++){
 			foto=datosMostradores[i].imagenFondoUrl
-			document.getElementById('mostradores').innerHTML += `
-			<article class="abajoIzquierda">
-					<img src="${foto}" class="imgFoto">
+			document.getElementById('abajo').innerHTML += `
+			<article class="contenedor">
+				<article class="abajoIzquierda">
+						<img class="imgFoto" src="${foto}">
+				</article>
+				<article class="abajoDerecha">
+					<div class="txtTitulo">${datosMostradores[i].titulo}</div>
+					<button class="btnGrupos pure-button" value="${i}">Abrir Mostrador</button> 
+				</article>						
 			</article>
-			<article class="abajoDerecha">
-				<div class="txtTitulo">${datosMostradores[i].titulo}</div>
-				<button class="btnGrupos" value="${i}">Abrir Mostrador</button> 
-			</article>
-			<hr>
-			<br>
+			<br>			
 		`
 		} //Termina For
 		for(let i=0;i<btnGrupos.length;i++){

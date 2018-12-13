@@ -32,18 +32,18 @@ var buscaFavoritos = function(){
 		var foto = ''
 		for(let i=0; i<datos.length; i++){
 			foto=datos[i].imagen
-			document.getElementById('favoritos').innerHTML += `
-			<article class="abajoIzquierda">
-				Pieza Unica
-				<img src="${foto}" class="imgFoto">
-			</article>
-			<article class="abajoDerecha">
-				<div class="txtTitulo">${datos[i].titulo}</div>
-				<div class="txtDescripcion">${datos[i].descripcion}</div>
-				<button class="btnDetallePieza" value="${datos[i].detalle}">Detalle Pieza</button>
-				<button class="btnFavorito"><img src="img/corazon_rojo.png"/></button>
-			</article>
-			<hr>
+			document.getElementById('abajo').innerHTML += `
+			<article class="contenedor">
+				<article class="abajoIzquierda">
+					<img src="${foto}" class="imgFoto">
+				</article>
+				<article class="abajoDerecha">
+					<div class="txtTitulo">${datos[i].titulo}</div>
+					<div class="txtDescripcion">${datos[i].descripcion}</div>
+					<button class="btnDetallePieza pure-button" value="${datos[i].detalle}">Detalle Pieza</button>
+					<button class="btnFavorito"><img src="img/corazon_rojo.png"/></button>
+				</article>
+			</article>						
 			<br>
 		`
 		} //Termina For

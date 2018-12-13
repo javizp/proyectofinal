@@ -40,15 +40,17 @@ var buscaVitrinas = function(){
 		for(let i=0; i<datos.length; i++){
 			foto=datos[i].imagenFondoUrl
 			document.getElementById('abajo').innerHTML += `
-			<article class="abajoIzquierda">
-					<img src="${foto}" class="imgFoto">
-			</article>
-			<article class="abajoDerecha">
-				<div class="txtTitulo">${datos[i].titulo}</div>
-				<button class="btnMostradores" value="${datos[i].id}">Abrir Vitrina</button> 
-			</article>
-			<hr>
-			<br>
+			<article class="contenedor">
+				<article class="abajoIzquierda">
+					<img class="imgFoto" src="${foto}">
+				</article>
+				<article class="abajoDerecha">
+					<span class="txtTitulo">${datos[i].titulo}</span>	
+					<br>
+					<button class="btnMostradores pure-button" value="${datos[i].id}">Abrir</button> 
+				</article>
+			</article>				
+			<br>		
 		`
 		} //Termina For
 		for(let i=0;i<btnMostradores.length;i++){
