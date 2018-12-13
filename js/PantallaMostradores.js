@@ -10,12 +10,13 @@ var btnGrupos=document.getElementsByClassName('btnGrupos')
 
 var buscaGrupos = function(){
 	localStorage.setItem("mostrador", this.value);	
-	PantallaGrupos= new BrowserWindow({width:800,height:825});
+	PantallaGrupos= new BrowserWindow({width:850,height:600});
 	PantallaGrupos.loadURL(url.format({
 		pathname: path.join(__dirname,'../PantallaGrupos.html'),
 		procol: 'file',
 		slashes: true
 	}))
+	PantallaGrupos.setResizable(false);
 	PantallaGrupos.show();
 }
 
@@ -36,8 +37,9 @@ var buscaMostradores = function(){
 						<img class="imgFoto" src="${foto}">
 				</article>
 				<article class="abajoDerecha">
-					<div class="txtTitulo">${datosMostradores[i].titulo}</div>
-					<button class="btnGrupos pure-button" value="${i}">Abrir Mostrador</button> 
+					<span class="txtTitulo">${datosMostradores[i].titulo}</span>
+					<br>					
+					<button class="btnGrupos btnAbrir" value="${i}">Abrir Mostrador</button> 
 				</article>						
 			</article>
 			<br>			

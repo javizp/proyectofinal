@@ -18,12 +18,13 @@ var detallePieza = function(){
 
 var buscaPiezas = function(){
 	localStorage.setItem("grupo", this.value);	
-	PantallaPiezas= new BrowserWindow({width:800,height:825});
+	PantallaPiezas= new BrowserWindow({width:850,height:600});
 	PantallaPiezas.loadURL(url.format({
 		pathname: path.join(__dirname,'../PantallaPiezas.html'),
 		procol: 'file',
 		slashes: true
 	}))
+	PantallaPiezas.setResizable(false);
 	PantallaPiezas.show();
 }
 
@@ -87,9 +88,15 @@ var buscaGrupos = function(){
 		var unico = ''
 		var foto = ''
 		var datosGrupos = datos.mostradores[mostrador].grupos
+		var descripcion = ''
 		for(let i=0; i<datosGrupos.length; i++){
 			unico = datosGrupos[i].unico
 			var imgBotonFavorito = ''
+			if (datosGrupos[i].piezas[0].descripcion == null) {
+				descripcion = "Sin Descripción"
+			} else {
+				descripcion = datosGrupos[i].piezas[0].descripcion
+			}			
 			if (unico == true) {											
 				foto=datosGrupos[i].piezas[0].imagenFondoUrl
 				document.getElementById('abajo').innerHTML += `
@@ -97,12 +104,14 @@ var buscaGrupos = function(){
 					<article class="abajoIzquierda">
 						<img src="${foto}" class="imgFoto">
 					</article>
-					<article class="abajoDerecha">
-						Pieza Unica
-						<div class="txtTitulo">${datosGrupos[i].piezas[0].titulo}</div>
-						<div class="txtDescripcion">${datosGrupos[i].piezas[0].descripcion}</div>
-						<button class="btnDetallePieza pure-button" value="${datosGrupos[i].piezas[0].detallesUrl}">Detalle Pieza</button>
+					<article class="abajoDerecha">				
+						<span class="txtTitulo">${datosGrupos[i].piezas[0].titulo}</span>
+						<br>
+						<span class="txtDescripcion">${descripcion}</span>												
+					</article>
+					<article class="articleBtn">						
 						<button class="btnFavorito"></button>
+						<button class="btnDetallePieza btnAbrir" value="${datosGrupos[i].piezas[0].detallesUrl}">Detalle Pieza</button>											
 					</article>
 				</article>
 				<br>
@@ -111,13 +120,13 @@ var buscaGrupos = function(){
 				foto=datosGrupos[i]. imagenFondoUrl
 				document.getElementById('abajo').innerHTML += `
 				<article class="contenedor">
-					<article class="abajoIzquierda">
-						Grupo
+					<article class="abajoIzquierda">						
 						<img src="${foto}" class="imgFoto">
 					</article>
 					<article class="abajoDerecha">
-						<div class="txtTitulo">${datosGrupos[i].titulo}</div>					
-						<button class="btnAbrirGrupo pure-button" value="${i}">Abrir Grupo</button>
+						<span class="txtTitulo">${datosGrupos[i].titulo}</span>
+						<br>						
+						<button class="btnAbrirGrupo btnAbrir" value="${i}">Abrir Grupo</button>
 					</article>
 				</article>							
 				<br>

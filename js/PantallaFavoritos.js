@@ -30,7 +30,13 @@ var buscaFavoritos = function(){
 	.then(datos=>datos.json())
 	.then(datos=>{
 		var foto = ''
+		var descripcion = ''
 		for(let i=0; i<datos.length; i++){
+			if (datos[i].descripcion == null) {
+				descripcion = "Sin Descripción"
+			} else {
+				descripcion = datos[i].descripcion
+			}
 			foto=datos[i].imagen
 			document.getElementById('abajo').innerHTML += `
 			<article class="contenedor">
@@ -38,10 +44,13 @@ var buscaFavoritos = function(){
 					<img src="${foto}" class="imgFoto">
 				</article>
 				<article class="abajoDerecha">
-					<div class="txtTitulo">${datos[i].titulo}</div>
-					<div class="txtDescripcion">${datos[i].descripcion}</div>
-					<button class="btnDetallePieza pure-button" value="${datos[i].detalle}">Detalle Pieza</button>
+					<span class="txtTitulo">${datos[i].titulo}</span>
+					<br>
+					<span class="txtDescripcion">${descripcion}</span>					
+				</article>
+				<article class="articleBtn">						
 					<button class="btnFavorito"><img src="img/corazon_rojo.png"/></button>
+					<button class="btnDetallePieza btnAbrir" value="${datos[i].detalle}">Detalle Pieza</button>
 				</article>
 			</article>						
 			<br>

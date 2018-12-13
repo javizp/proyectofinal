@@ -76,8 +76,13 @@ var buscaPiezas = function(){
 	.then(datos=>{
 		var foto = ''
 		var datosPiezas = datos.mostradores[mostrador].grupos[grupo].piezas
+		var descripcion = ''
 		for(let i=0; i<datosPiezas.length; i++){			
-			
+			if (datosPiezas[i].descripcion == null) {
+				descripcion = "Sin Descripción"
+			} else {
+				descripcion = datosPiezas[i].descripcion
+			}
 			foto=datosPiezas[i].imagenFondoUrl
 			document.getElementById('abajo').innerHTML += `
 			<article class="contenedor">
@@ -85,10 +90,14 @@ var buscaPiezas = function(){
 					<img src="${foto}" class="imgFoto">
 				</article>
 				<article class="abajoDerecha">
-					<div class="txtTitulo">${datosPiezas[i].titulo}</div>
-					<div class="txtTitulo">${datosPiezas[i].descripcion}</div>
-					<button class="btnDetallePieza pure-button" value="${datosPiezas[i].detallesUrl}">Detalle Pieza</button>
+					<span class="txtTitulo">${datosPiezas[i].titulo}</span>
+					<br>
+					<span class="txtDescripcion">${descripcion}</span>					
+
+				</article>
+				<article class="articleBtn">					
 					<button class="btnFavorito"></button>
+					<button class="btnDetallePieza btnAbrir" value="${datosPiezas[i].detallesUrl}">Detalle Pieza</button>
 				</article>
 			</article>
 			<br>
